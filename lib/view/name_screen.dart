@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'constant_value.dart';
 import 'package:sizer/sizer.dart';
-import 'home_screen.dart';
+import 'main_page.dart';
 
 
 class NameScreen extends StatefulWidget {
@@ -119,7 +119,7 @@ class NameScreenState extends State<StatefulWidget> {
         floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context)
-              .push(MaterialPageRoute(builder: (_) => const HomeScreen()));
+              .push(MaterialPageRoute(builder: (_) => const MainPage()));
         },
     child: const Icon(Icons.arrow_right_alt_sharp),
     )//body
