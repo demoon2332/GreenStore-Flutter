@@ -2,9 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'constant_value.dart';
+import '../constant_value.dart';
 import 'package:sizer/sizer.dart';
-import 'main_page.dart';
+import '../main_page.dart';
 
 
 class NameScreen extends StatefulWidget {

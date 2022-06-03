@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-import 'constant_value.dart';
+import '../constant_value.dart';
 import 'verify_screen.dart';
 import 'select_countries.dart';
 

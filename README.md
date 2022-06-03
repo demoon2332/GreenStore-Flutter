@@ -22,4 +22,4 @@ samples, guidance on mobile development, and a full API reference.
 
 
 ## End
-Thanks for reading it. <3
+Thanks for reading it. Hope you enjoy it <3

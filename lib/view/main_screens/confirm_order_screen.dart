@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import '../convert/get_total_order.dart';
+import '../../convert/get_total_order.dart';
 
-import '../convert/price_convert.dart';
-import '../models/export_models.dart';
+import '../../convert/price_convert.dart';
+import '../../models/export_models.dart';
 
-import '../repository/MemCartRepos.dart';
-import '../repository/MemUserInfoRepos.dart';
-import '../models/DAO/user_dao.dart';
+import '../../repository/MemCartRepos.dart';
+import '../../repository/MemUserInfoRepos.dart';
+import '../../models/DAO/user_dao.dart';
 
 import 'package:provider/provider.dart';
 
@@ -28,7 +28,7 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
         child: Scaffold(
             appBar: AppBar(
               title: const Text(
-                'Xác nhận đơn hàng',
+                'Confirm order',
                 style: TextStyle(color: Colors.black),
               ),
               iconTheme: const IconThemeData(
@@ -55,19 +55,19 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  _headerTitleUser(Icons.person, "Thông tin khách hàng"),
+                  _headerTitleUser(Icons.person, "Customer information"),
                   const SizedBox(height: 12),
                   _cardUserInfo(memUserInfoRepos),
                   const SizedBox(height: 28),
-                  _headerTitle(Icons.credit_card, "Hình thức thanh toán"),
+                  _headerTitle(Icons.credit_card, "Payment method"),
                   const SizedBox(height: 12),
                   _cardPaymentMethod(),
                   const SizedBox(height: 28),
-                  _headerTitle(Icons.local_shipping, "Hình thức vận chuyển"),
+                  _headerTitle(Icons.local_shipping, "Type of shipment"),
                   const SizedBox(height: 12),
                   _cardShipping(),
                   const SizedBox(height: 28),
-                  _headerTitle(Icons.shopping_cart, "Giỏ hàng"),
+                  _headerTitle(Icons.shopping_cart, "Cart"),
                   const SizedBox(height: 12),
                   SizedBox(
                     child: showData(memCartRepos, _userDAO),
@@ -115,7 +115,7 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Thanh toán khi nhận hàng", style: TextStyle(fontSize: 16),),
+              Text("Payment on delivery", style: TextStyle(fontSize: 16),),
             ],
           ),
         ),
@@ -133,7 +133,7 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text("Giao hàng tiêu chuẩn (sau 1 ngày làm việc)", style: TextStyle(fontSize: 14),),
+              const Text("Standard Delivery (after 1 day)", style: TextStyle(fontSize: 14),),
             ],
           ),
         ),
@@ -190,12 +190,12 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                 return cartBody(memCartRepos, memUserInfoRepos, _userDAO);
               } else {
                 return const Center(
-                  child: Text('Không có dữ liệu tìm thấy'),
+                  child: Text('No data'),
                 );
               }
             } else {
               return const Center(
-                child: Text('Không có dữ liệu tìm thấy'),
+                child: Text('No data'),
               );
             }
           } else if (snapshot.connectionState == ConnectionState.waiting) {
@@ -204,7 +204,7 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
             );
           } else {
             return const Center(
-              child: Text('Có lỗi khi tải dữ liệu.'),
+              child: Text('Something went wrong while loading.'),
             );
           }
         });
@@ -235,7 +235,7 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                 height: 35,
                 child: Center(
                     child: Text(
-                  'ĐẶT HÀNG',
+                  'ORDER',
                   style: const TextStyle(
                       color: Colors.white, fontWeight: FontWeight.bold),
                 )),
@@ -286,12 +286,12 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                     });
               } else {
                 return Center(
-                  child: Text('Không có sản phẩm trong đơn hàng '),
+                  child: Text("There's no product in cart."),
                 );
               }
             } else {
               return Center(
-                child: Text('Không có sản phẩm trong đơn hàng '),
+                child: Text("There's no product in cart."),
               );
             }
           } else if (snapshot.connectionState == ConnectionState.waiting) {
@@ -303,7 +303,7 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                 });
           } else {
             return Center(
-              child: Text('Có lỗi khi tải dữ liệu'),
+              child: Text('Something went while loading'),
             );
           }
         });
@@ -356,7 +356,7 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                         padding: const EdgeInsets.only(left: 10),
                         child: Chip(
                             label: Text(
-                                'Số lượng: ' + product.quantity!.toString())),
+                                'Quantity: ' + product.quantity!.toString())),
                       ),
                     ],
                   ),

@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
-import '../convert/price_convert.dart';
+import '../../convert/price_convert.dart';
 import 'package:provider/provider.dart';
 
 // MODELS
-import '../models/DAO/user_dao.dart';
-import '../models/export_models.dart';
-import '../repository/MemFavRepos.dart';
+import '../../models/DAO/user_dao.dart';
+import '../../models/export_models.dart';
+import '../../repository/MemFavRepos.dart';
 
 //SERVICES
-import '../repository/MemCartRepos.dart';
-import '../services/category_items_api.dart';
-import 'items/product_card.dart';
-import '../services/product_api.dart';
-import '../services/ratings api.dart';
+import '../../repository/MemCartRepos.dart';
+import '../../services/category_items_api.dart';
+import '../items/product_card.dart';
+import '../../services/product_api.dart';
+import '../../services/ratings api.dart';
 
 //CONVERT
-import '../convert/avg_ratings.dart';
+import '../../convert/avg_ratings.dart';
 
 
 
@@ -37,7 +37,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
       child: Scaffold(
           appBar: AppBar(
             title: const Text(
-              'Chi tiết sản phẩm',
+              'Product detail',
               style: TextStyle(color: Colors.black),
             ),
             iconTheme: const IconThemeData(
@@ -96,14 +96,14 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                             ],
                           );
                         } else {
-                          return const Center(child: Text('Không có dữ liệu'));
+                          return const Center(child: Text('No data'));
                         }
                       } else if (snapshot.connectionState ==
                           ConnectionState.waiting) {
                         return const Center(child: CircularProgressIndicator());
                       } else {
                         return const Center(
-                            child: Text('Đã có lỗi khi tải dữ liệu'));
+                            child: Text('Something went wrong while loading'));
                       }
                     }),
               ),
@@ -133,7 +133,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           ),
           child: const Center(
               child: Text(
-            'XEM ĐÁNH GIÁ',
+            'SEE RATINGS',
             style: TextStyle(
                 fontWeight: FontWeight.bold, color: Colors.green, fontSize: 14),
           )),
@@ -147,7 +147,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text(
-          'Đánh giá',
+          'Rate',
           style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
         ),
         const SizedBox(height: 16),
@@ -181,7 +181,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                               )
                             ])),
                             const SizedBox(height: 10),
-                            Text(data.length.toString() + " đánh giá"),
+                            Text(data.length.toString() + " rates"),
                           ],
                         );
                       } else {
@@ -208,7 +208,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text(
-          'Chi tiết sản phẩm',
+          'Product detail',
           style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
         ),
         const SizedBox(height: 16),
@@ -225,7 +225,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text(
-          'Sản phẩm liên quan',
+          'Related Products',
           style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
         ),
         const SizedBox(height: 16),
@@ -249,12 +249,12 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         }),
                   );
                 } else {
-                  return const Center(child: Text('Không có dữ liệu'));
+                  return const Center(child: Text('No data'));
                 }
               } else if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(child: CircularProgressIndicator());
               } else {
-                return const Text('Đã có lỗi khi tải dữ liệu');
+                return const Text('Something went wrong while loading');
               }
             })
       ],
@@ -272,7 +272,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         onTap: () {
           //TODO: Update cart
           prod.addOneItemQuality(uid.userId()!,pid);
-          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Thêm sản phẩm vào giỏ hàng thành công')));
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Add product to card successfully')));
         },
         child: Container(
           decoration: BoxDecoration(
@@ -284,7 +284,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           ),
           child: const Center(
               child: Text(
-            'THÊM VÀO GIỎ HÀNG',
+            'ADD TO CART',
             style: TextStyle(
                 fontWeight: FontWeight.bold, color: Colors.white, fontSize: 14),
           )),
@@ -299,7 +299,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
       onTap: () {
         //TODO: Add to favourite
         memFavRepos.addProduct(product);
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: const Text('Đã thêm vào danh sách yêu thích'),));
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: const Text('Added to favorite'),));
       },
       child: SizedBox(
         width: double.infinity,
@@ -314,7 +314,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           ),
           child: const Center(
               child: Text(
-                'THÊM VÀO DANH SÁCH YÊU THÍCH',
+                'ADD TO FAVORITE',
                 style: TextStyle(
                     fontWeight: FontWeight.bold, color: Colors.green, fontSize: 14),
               )),
@@ -350,7 +350,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         RichText(
             text: TextSpan(children: [
           const TextSpan(
-              text: 'Xuất xứ: ',
+              text: 'Origin: ',
               style: TextStyle(fontSize: 14, color: Colors.grey)),
           TextSpan(
             text: product.country,
@@ -364,7 +364,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         RichText(
             text: TextSpan(children: [
           const TextSpan(
-              text: 'Thương hiệu: ',
+              text: 'Brand: ',
               style: TextStyle(fontSize: 14, color: Colors.grey)),
           TextSpan(
             text: product.brand,

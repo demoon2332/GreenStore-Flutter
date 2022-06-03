@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-import '../convert/price_convert.dart';
+import '../../convert/price_convert.dart';
 
-import '../models/product.dart';
-import '../repository/MemFavRepos.dart';
+import '../../models/product.dart';
+import '../../repository/MemFavRepos.dart';
 import 'package:provider/provider.dart';
 
-import './items/no_items_page.dart';
+import '../items/no_items_page.dart';
 
 class FavoriteScreen extends StatefulWidget {
   const FavoriteScreen({Key? key}) : super(key: key);
@@ -31,12 +31,12 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: const [
                 Text(
-                  "Yêu thích",
+                  "Favorite",
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 32),
                 ),
                 SizedBox(height: 12),
                 Text(
-                  "Vuốt từ phải sang để xóa sản phẩm trong danh sách.",
+                  "Slide to remove product.",
                   style: TextStyle(color: Colors.grey, fontSize: 14),
                 ),
                 SizedBox(height: 22),

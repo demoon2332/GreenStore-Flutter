@@ -1,7 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/DAO/user_dao.dart';
-import 'edit_phone_number.dart';
+import 'phoneAuthentication/edit_phone_number.dart';
+
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -11,10 +13,24 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final auth = FirebaseAuth.instance;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   String _errorAfterSubmit = "";
+
+  @override
+  void initState(){
+    checkLogin();
+    super.initState();
+  }
+
+   checkLogin() async {
+    var a = await auth.currentUser;
+    if(a != null){
+      Navigator.pushReplacementNamed(context, '/');
+    }
+  }
 
   @override
   void dispose() {

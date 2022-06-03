@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 
-import '../services/product_api.dart';
-import '../models/export_models.dart';
-import '../convert/price_convert.dart';
-import '../convert/short_title.dart';
+import '../../services/product_api.dart';
+import '../../models/export_models.dart';
+import '../../convert/price_convert.dart';
+import '../../convert/short_title.dart';
+
+//shared references
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({Key? key}) : super(key: key);
@@ -16,6 +19,16 @@ class _SearchScreenState extends State<SearchScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final _searchFocusNode = FocusNode();
   String _searchText = "";
+
+  @override
+  void initState(){
+    super.initState();
+  }
+
+  void getHistory () async{
+    SharedPreferences local = await SharedPreferences.getInstance();
+    var historySearch = local.getString('history-search');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +47,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   const Text(
-                    "Tìm kiếm",
+                    "Search",
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 32),
                   ),
                   const SizedBox(height: 16),
@@ -62,7 +75,7 @@ class _SearchScreenState extends State<SearchScreen> {
       focusNode: _searchFocusNode,
       decoration: InputDecoration(
           prefixIcon: Icon(Icons.search, color: Colors.green),
-          hintText: 'Tìm kiếm mọi thứ tại đây',
+          hintText: 'Search...',
           border: OutlineInputBorder(
               borderSide: const BorderSide(color: Colors.transparent),
               borderRadius: BorderRadius.circular(16)),
@@ -76,7 +89,7 @@ class _SearchScreenState extends State<SearchScreen> {
   //TODO: ADD Future Builder and ListView.builder when user start texting. (Check if text is null, clear the showData)
   Widget showData() {
     if (_searchText.length < 3) {
-      return notFoundScrren();
+      return notFoundScreen();
     } else {
       return FutureBuilder(
           future: ProductApi.searchProduct(_searchText),
@@ -95,20 +108,20 @@ class _SearchScreenState extends State<SearchScreen> {
                     primary: true,
                   );
                 } else {
-                  return notFoundScrren();
+                  return notFoundScreen();
                 }
               }
-              return notFoundScrren();
+              return notFoundScreen();
             } else if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(child: CircularProgressIndicator());
             } else {
-              return const Text('Đã có lỗi khi tìm kiếm nội dung');
+              return const Text('Something went wrong while searching');
             }
           });
     }
   }
 
-  Widget notFoundScrren() {
+  Widget notFoundScreen() {
     return Image.asset('assets/not_found.jpg');
   }
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
-import '../repository/MemUserInfoRepos.dart';
+import '../../repository/MemUserInfoRepos.dart';
 
 class UserProfileScreen extends StatefulWidget {
   const UserProfileScreen({Key? key}) : super(key: key);
@@ -26,7 +26,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
         child: Scaffold(
           appBar: AppBar(
             title: const Text(
-              'Tài khoản của tôi',
+              'My Account',
               style: TextStyle(color: Colors.black),
             ),
             iconTheme: const IconThemeData(
@@ -72,20 +72,20 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
             const Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                "Thông tin cá nhân",
+                "Your Information",
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 32),
               ),
             ),
             const SizedBox(height: 32),
-            buildTitle(Icons.person, 'Họ và tên'),
+            buildTitle(Icons.person, 'Full name'),
             const SizedBox(height: 16),
             nameField(),
             const SizedBox(height: 24),
-            buildTitle(Icons.phone, 'Số điện thoại'),
+            buildTitle(Icons.phone, 'Phone'),
             const SizedBox(height: 16),
             phoneField(),
             const SizedBox(height: 24),
-            buildTitle(Icons.location_on, 'Địa chỉ'),
+            buildTitle(Icons.location_on, 'Address'),
             const SizedBox(height: 16),
             addressField(),
             const SizedBox(height: 16),
@@ -111,7 +111,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
       validator: (value) => addressValidator(value!),
       controller: _addressController,
       decoration: InputDecoration(
-          hintText: 'Vui lòng nhập địa chỉ của bạn',
+          hintText: 'Enter your address',
           border: OutlineInputBorder(
               borderSide: const BorderSide(color: Colors.green),
               borderRadius: BorderRadius.circular(16)),
@@ -126,7 +126,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
       validator: (value) => nameValidator(value!),
       controller: _nameController,
       decoration: InputDecoration(
-          hintText: 'Vui lòng nhập họ và tên của bạn',
+          hintText: 'Enter your full name',
           border: OutlineInputBorder(
               borderSide: const BorderSide(color: Colors.green),
               borderRadius: BorderRadius.circular(16)),
@@ -141,7 +141,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
       validator: (value) => phoneValidator(value!),
       controller: _phoneController,
       decoration: InputDecoration(
-          hintText: 'Vui lòng nhập SĐT của bạn',
+          hintText: 'Enter your phone number',
           border: OutlineInputBorder(
               borderSide: const BorderSide(color: Colors.green),
               borderRadius: BorderRadius.circular(16)),
@@ -160,25 +160,25 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
 
   String? phoneValidator(String value) {
     if (value == null || value.isEmpty) {
-      return "Vui lòng điền Số điện thoại";
+      return "Enter phone number";
     } else if (!RegExp("[0-9]").hasMatch(value)) {
-      return "Sai định dạng số điện thoại";
+      return "It's not phone format";
     }
     return null;
   }
 
   String? nameValidator(String value) {
     if (value == null || value.isEmpty) {
-      return "Vui lòng điền Tên của bạn";
+      return "Enter your name";
     } else if (RegExp("[0-9]").hasMatch(value)) {
-      return "Sai định dạng tên";
+      return "Wrong name format";
     }
     return null;
   }
 
   String? addressValidator(String value) {
     if (value == null || value.isEmpty) {
-      return "Vui lòng điền Tên của bạn";
+      return "Enter your name";
     }
     return null;
   }

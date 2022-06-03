@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import '../convert/get_total_order.dart';
+import '../../convert/get_total_order.dart';
 import 'package:provider/provider.dart';
 
-import '../convert/price_convert.dart';
-import '../models/export_models.dart';
-import '../repository/MemCartRepos.dart';
-import '../models/DAO/user_dao.dart';
+import '../../convert/price_convert.dart';
+import '../../models/export_models.dart';
+import '../../repository/MemCartRepos.dart';
+import '../../models/DAO/user_dao.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({Key? key}) : super(key: key);
@@ -40,12 +40,12 @@ class _CartScreenState extends State<CartScreen> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: const [
             Text(
-              "Giỏ hàng",
+              "Card",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 32),
             ),
             SizedBox(height: 12),
             Text(
-              "Có thể mất ít thời gian để phản hồi với máy chủ.",
+              "Loading... Please wait.",
               style: TextStyle(color: Colors.grey, fontSize: 14),
             ),
             SizedBox(height: 22),
@@ -69,14 +69,14 @@ class _CartScreenState extends State<CartScreen> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: const [
             Text(
-              "Giỏ hàng",
+              "Cart",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 32),
             ),
             SizedBox(height: 28),
           ],
         ),
-        Expanded(
-          child: Center(child: Text('Không có sản phẩm trong giỏ hàng ')),
+        const Expanded(
+          child: Center(child: Text("There's nothing in your cart. ")),
           flex: 4,
         ),
       ],
@@ -108,7 +108,7 @@ class _CartScreenState extends State<CartScreen> {
             return cartBodyNull(memCartRepos, _userDAO);
           } else {
             return Center(
-              child: Text('Có lỗi khi tải dữ liệu.'),
+              child: Text('Something went wrong while loading.'),
             );
           }
         });
@@ -132,7 +132,7 @@ class _CartScreenState extends State<CartScreen> {
               },
               child: Center(
                   child: Text(
-                'ĐẶT HÀNG',
+                'ORDER',
                 style: const TextStyle(
                     color: Colors.white, fontWeight: FontWeight.bold),
               )),
@@ -180,12 +180,12 @@ class _CartScreenState extends State<CartScreen> {
                     });
               } else {
                 return Center(
-                  child: Text('Không có sản phẩm trong đơn hàng '),
+                  child: Text("There's no product in order."),
                 );
               }
             } else {
               return Center(
-                child: Text('Không có sản phẩm trong đơn hàng '),
+                child: Text("There's no product in order."),
               );
             }
           } else if (snapshot.connectionState == ConnectionState.waiting) {
@@ -197,7 +197,7 @@ class _CartScreenState extends State<CartScreen> {
                 });
           } else {
             return Center(
-              child: Text('Có lỗi khi tải dữ liệu'),
+              child: Text('Something went wrong while loading.'),
             );
           }
         });

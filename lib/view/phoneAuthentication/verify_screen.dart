@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import './constant_value.dart';
+import '../constant_value.dart';
 import 'name_screen.dart';
 
 enum Status { Waiting, Error,Done }

@@ -4,11 +4,12 @@ import 'package:badges/badges.dart';
 
 //SPECIFIC SCREEN
 import '../models/DAO/user_dao.dart';
-import './home_screen.dart';
-import './search_screen.dart';
-import './category_screen.dart';
-import './favorite_screen.dart';
-import './cart_screen.dart';
+import 'main_screens/home_screen.dart';
+import 'main_screens/search_screen.dart';
+import './category/category_screen.dart';
+import 'main_screens/favorite_screen.dart';
+import 'main_screens/cart_screen.dart';
+
 
 //NAV
 import '../navigation/MainPageNav.dart';

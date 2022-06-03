@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
-import '../convert/avg_ratings.dart';
-import '../models/rating.dart';
+import '../../convert/avg_ratings.dart';
+import '../../models/rating.dart';
 
-import '../services/ratings api.dart';
+import '../../services/ratings api.dart';
 
 class RatingScreen extends StatefulWidget {
   const RatingScreen({Key? key}) : super(key: key);
@@ -22,7 +22,7 @@ class _RatingScreenState extends State<RatingScreen> {
       child: Scaffold(
           appBar: AppBar(
             title: const Text(
-              'Đánh giá chi tiết',
+              'Rating detail',
               style: TextStyle(color: Colors.black),
             ),
             iconTheme: const IconThemeData(
@@ -54,16 +54,16 @@ class _RatingScreenState extends State<RatingScreen> {
                         );
                       } else {
                         return const Center(
-                            child: Text('Sản phẩm này chưa có bài đánh giá nào.'));
+                            child: Text("This product haven't any rating ."));
                       }
                     } else {
-                      return const Center(child: Text('Không có dữ liệu'));
+                      return const Center(child: Text('No data'));
                     }
                   } else if (snapshot.connectionState ==
                       ConnectionState.waiting) {
                     return const Center(child: CircularProgressIndicator());
                   } else {
-                    return const Center(child: Text('Lỗi khi tải dữ liệu'));
+                    return const Center(child: Text('Something went wrong during loading'));
                   }
                 }),
           )),
@@ -76,16 +76,16 @@ class _RatingScreenState extends State<RatingScreen> {
       {
         "_id": "62707c9facc580bc3d728aec",
         "pid": "1",
-        "cus_id": "112334",
-        "cus_name": "Lê Văn An",
+        "cus_id": "122334",
+        "cus_name": "Nguyen Van Cuong",
         "star": 4,
         "__v": 0
       },
       {
         "_id": "62707c9facc580bc3d728aed",
         "pid": "1",
-        "cus_id": "116532",
-        "cus_name": "Nguyễn Thị Bảy",
+        "cus_id": "166532",
+        "cus_name": "Harry Well",
         "star": 5,
         "__v": 0
       }
@@ -134,7 +134,7 @@ class _RatingScreenState extends State<RatingScreen> {
               ),
             ]),
             const SizedBox(height: 16),
-            Text("Sản phẩm tốt", style: TextStyle(fontSize: 18, color: Colors.grey[700]),),
+            Text("Good product", style: TextStyle(fontSize: 18, color: Colors.grey[700]),),
             const SizedBox(height: 16),
             Divider(color: Colors.grey[300], thickness: 1.5),
           ],
@@ -174,7 +174,7 @@ class _RatingScreenState extends State<RatingScreen> {
             ),
             Expanded(
                 child: Text(
-              data.length.toString() + " đánh giá",
+              data.length.toString() + " ratings",
               style: TextStyle(fontSize: 24, color: Colors.grey[700]),
             )),
           ],

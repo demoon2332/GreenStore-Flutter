@@ -1,4 +1,4 @@
-import 'package:greenstore_flutter/view/edit_phone_number.dart';
+import 'package:greenstore_flutter/view/phoneAuthentication/edit_phone_number.dart';
 
 import './view/screen_export.dart';
 class Routes{

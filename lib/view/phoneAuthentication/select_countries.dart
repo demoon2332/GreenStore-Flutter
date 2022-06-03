@@ -4,7 +4,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'constant_value.dart';
+import '../constant_value.dart';
 
 class SelectCountry extends StatefulWidget {
   const SelectCountry ({Key? key}) : super(key: key);

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../services/category_api.dart';
+import '../../services/category_api.dart';
 
 class CategoryScreen extends StatefulWidget {
   const CategoryScreen({Key? key}) : super(key: key);

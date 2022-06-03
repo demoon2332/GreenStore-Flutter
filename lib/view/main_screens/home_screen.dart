@@ -5,17 +5,17 @@ import 'dart:convert';
 
 //STATE MANAGEMENT
 import 'package:provider/provider.dart';
-import '../navigation/MainPageNav.dart';
+import '../../navigation/MainPageNav.dart';
 
 // MODELS
-import '../models/export_models.dart';
+import '../../models/export_models.dart';
 
 //SERVICES
-import '../services/carousel_api.dart';
-import '../services/category_items_api.dart';
+import '../../services/carousel_api.dart';
+import '../../services/category_items_api.dart';
 
 //ITEMS
-import './items/product_card.dart';
+import '../items/product_card.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -234,14 +234,14 @@ class _HomeScreenState extends State<HomeScreen> {
             );
           }
           else{
-            return const Center(child: Text('Không có dữ liệu'));
+            return const Center(child: Text('No data'));
           }
         }
         else if(snapshot.connectionState == ConnectionState.waiting){
           return const Center(child: CircularProgressIndicator());
         }
         else{
-          return const Text('Đã có lỗi khi tải dữ liệu');
+          return const Text('Something went wrong while loading');
         }
 
       }

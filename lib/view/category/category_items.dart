@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../models/product.dart';
-import '../services/category_items_api.dart';
-import './items/product_card.dart';
+import '../../models/product.dart';
+import '../../services/category_items_api.dart';
+import '../items/product_card.dart';
 
 class CategoryItemsScreen extends StatefulWidget {
   const CategoryItemsScreen({Key? key}) : super(key: key);
