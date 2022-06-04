@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
+import '../../services/user_api.dart';
 
 class UserDao extends ChangeNotifier{
   final auth = FirebaseAuth.instance;
@@ -20,13 +21,19 @@ class UserDao extends ChangeNotifier{
     return auth.currentUser?.email;
   }
 
+
+
   //SIGN UP
   Future<String> signup(String email, String password) async{
     try{
       await auth.createUserWithEmailAndPassword(email: email, password: password);
-      await auth.signOut();
-      notifyListeners();
-      return "";
+      var result = await UserApi.signUp("Guest",auth.currentUser?.uid,auth.currentUser?.email , auth.currentUser?.phoneNumber);
+      if(result['code']==0){
+        await auth.signOut();
+        notifyListeners();
+        return "";
+      }
+
     } on FirebaseAuthException catch (e){
       if(e.code == 'weak-password'){
         return "Weak password";

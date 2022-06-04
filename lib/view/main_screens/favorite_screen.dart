@@ -90,7 +90,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
   }
 
   Widget buildItemSearch(BuildContext context, Product _product) {
-    const urlPrimary = 'https://cryptic-caverns-40086.herokuapp.com/';
+    const urlPrimary = 'https://greenstore-api.herokuapp.com/';
     return GestureDetector(
       onTap: (){
         Navigator.pushNamed(context, 'p_details',arguments: _product.pid);

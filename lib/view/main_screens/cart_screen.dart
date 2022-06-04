@@ -238,7 +238,7 @@ class _CartScreenState extends State<CartScreen> {
                     },
                     child: FittedBox(
                       child: Image.network(
-                          'https://cryptic-caverns-40086.herokuapp.com/' +
+                          'https://greenstore-api.herokuapp.com/' +
                               product.url!,
                           width: 150,
                           height: 125),

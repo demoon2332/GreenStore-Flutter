@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 //MODELS
 
 class CartApi{
-  static const url_link = 'https://cryptic-caverns-40086.herokuapp.com/cart/';
+  static const url_link = 'https://greenstore-api.herokuapp.com/cart/';
 
   //NOTE: uid comes from userDAO in providers
   //get only items atrtribute

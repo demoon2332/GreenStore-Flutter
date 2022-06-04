@@ -25,7 +25,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  static const urlPrimary ='https://cryptic-caverns-40086.herokuapp.com/';
+  static const urlPrimary ='https://greenstore-api.herokuapp.com/';
   @override
   Widget build(BuildContext context) {
     var _tabPage = Provider.of<MainPageNav>(context, listen: false);

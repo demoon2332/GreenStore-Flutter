@@ -94,42 +94,42 @@ class _MainPageState extends State<MainPage> {
                   ),
                   const Divider(color: Colors.grey),
                   // CATEGORY
-                  ListTile(
-                    title: const Text('Rau củ quả'),
-                    leading: const Icon(Icons.arrow_forward_ios, color: Colors.green),
-                    contentPadding: const EdgeInsets.only(left: 0.0),
-                    //TODO: NAVIGATE
-                    onTap: ()=> {
-                      Navigator.pushNamed(context, 'cate_items', arguments: 'veg')
-                    },
-                  ),
-                  ListTile(
-                    title: const Text('Đồ uống'),
-                    leading: const Icon(Icons.arrow_forward_ios, color: Colors.green),
-                    contentPadding: const EdgeInsets.only(left: 0.0),
-                    //TODO: NAVIGATE
-                    onTap: ()=> {
-                      Navigator.pushNamed(context, 'cate_items', arguments: 'drink')
-                    },
-                  ),
-                  ListTile(
-                    title: const Text('Mì và bún'),
-                    leading: const Icon(Icons.arrow_forward_ios, color: Colors.green),
-                    contentPadding: const EdgeInsets.only(left: 0.0),
-                    //TODO: NAVIGATE
-                    onTap: ()=> {
-                      Navigator.pushNamed(context, 'cate_items', arguments: 'noodles')
-                    },
-                  ),
-                  ListTile(
-                    title: const Text('Snack'),
-                    leading: const Icon(Icons.arrow_forward_ios, color: Colors.green),
-                    contentPadding: const EdgeInsets.only(left: 0.0),
-                    //TODO: NAVIGATE
-                    onTap: ()=> {
-                      Navigator.pushNamed(context, 'cate_items', arguments: 'snack')
-                    },
-                  ),
+                  // ListTile(
+                  //   title: const Text('Rau củ quả'),
+                  //   leading: const Icon(Icons.arrow_forward_ios, color: Colors.green),
+                  //   contentPadding: const EdgeInsets.only(left: 0.0),
+                  //   //TODO: NAVIGATE
+                  //   onTap: ()=> {
+                  //     Navigator.pushNamed(context, 'cate_items', arguments: 'veg')
+                  //   },
+                  // ),
+                  // ListTile(
+                  //   title: const Text('Đồ uống'),
+                  //   leading: const Icon(Icons.arrow_forward_ios, color: Colors.green),
+                  //   contentPadding: const EdgeInsets.only(left: 0.0),
+                  //   //TODO: NAVIGATE
+                  //   onTap: ()=> {
+                  //     Navigator.pushNamed(context, 'cate_items', arguments: 'drink')
+                  //   },
+                  // ),
+                  // ListTile(
+                  //   title: const Text('Mì và bún'),
+                  //   leading: const Icon(Icons.arrow_forward_ios, color: Colors.green),
+                  //   contentPadding: const EdgeInsets.only(left: 0.0),
+                  //   //TODO: NAVIGATE
+                  //   onTap: ()=> {
+                  //     Navigator.pushNamed(context, 'cate_items', arguments: 'noodles')
+                  //   },
+                  // ),
+                  // ListTile(
+                  //   title: const Text('Snack'),
+                  //   leading: const Icon(Icons.arrow_forward_ios, color: Colors.green),
+                  //   contentPadding: const EdgeInsets.only(left: 0.0),
+                  //   //TODO: NAVIGATE
+                  //   onTap: ()=> {
+                  //     Navigator.pushNamed(context, 'cate_items', arguments: 'snack')
+                  //   },
+                  // ),
                   const Divider(color: Colors.grey),
                   // CATEGORY
                   ListTile(

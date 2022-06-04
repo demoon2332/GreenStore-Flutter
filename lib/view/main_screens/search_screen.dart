@@ -134,7 +134,7 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget buildItemSearch(Product product) {
     return SizedBox(
         //width: 200,
-        height: 135,
+        height: 125,
         child: GestureDetector(
           onTap: () {
             Navigator.pushNamed(context, 'p_details', arguments: product.pid!);
@@ -149,10 +149,10 @@ class _SearchScreenState extends State<SearchScreen> {
                   children: [
                     FittedBox(
                       child: Image.network(
-                          'https://cryptic-caverns-40086.herokuapp.com/' +
+                          'https://greenstore-api.herokuapp.com/' +
                               product.url!,
                           width: 150,
-                          height: 125),
+                          height: 110),
                       fit: BoxFit.fill,
                     ),
                     Expanded(

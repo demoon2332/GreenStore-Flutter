@@ -5,7 +5,7 @@ import '../../convert/price_convert.dart';
 import '../../convert/short_title.dart';
 
 class ProductCard{
-  static const urlPrimary ='https://cryptic-caverns-40086.herokuapp.com/';
+  static const urlPrimary ='https://greenstore-api.herokuapp.com/';
 
   static Widget getProductCard(BuildContext context,Product product){
     return GestureDetector(

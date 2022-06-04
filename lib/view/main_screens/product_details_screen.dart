@@ -27,7 +27,7 @@ class ProductDetailScreen extends StatefulWidget {
 }
 
 class _ProductDetailScreenState extends State<ProductDetailScreen> {
-  static const urlPrimary = 'https://cryptic-caverns-40086.herokuapp.com/';
+  static const urlPrimary = 'https://greenstore-api.herokuapp.com/';
 
   @override
   Widget build(BuildContext context) {

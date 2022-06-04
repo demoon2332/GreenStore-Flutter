@@ -1,10 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import '../../services/user_api.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../constant_value.dart';
 import 'package:sizer/sizer.dart';
 import '../main_page.dart';
+import '../constant_value.dart';
 
 
 class NameScreen extends StatefulWidget {
@@ -42,6 +44,11 @@ class NameScreenState extends State<StatefulWidget> {
     },
 
     ).catchError((error){_error = error.toString();print("Error in nameScreen:"+error);});
+  }
+
+  Future<Map<String, dynamic>> storeUserToAPI() async {
+    var json = await UserApi.signUp(nameController.text, FirebaseAuth.instance.currentUser?.uid, " ", FirebaseAuth.instance.currentUser?.phoneNumber);
+    return json;
   }
 
   @override
@@ -117,9 +124,32 @@ class NameScreenState extends State<StatefulWidget> {
           ),
         ),
         floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (_) => const MainPage()));
+        onPressed: () async {
+          try{
+            FirebaseAuth.instance.currentUser?.updateDisplayName(nameController.text);
+            //storeUserToFirestore();
+            var json = await storeUserToAPI();
+            if(json['code'] == 0){
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                backgroundColor: successColorLight,
+                content: Text("Announcement: ${json['message'].toString()} "),
+              ));
+            }
+            else{
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                backgroundColor: errorColorLight,
+                content: Text("Announcement: ${json['message'].toString()} "),
+              ));
+            }
+            Navigator.popAndPushNamed(context,'home');
+          }
+          catch(error){
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              backgroundColor: errorColorLight,
+              content: Text("Register fail: "+error.toString()),
+            ));
+          }
+
         },
     child: const Icon(Icons.arrow_right_alt_sharp),
     )//body
@@ -158,7 +188,8 @@ class NameScreenState extends State<StatefulWidget> {
         onPressed: () {
           if(_formKey.currentState!.validate()){
             FirebaseAuth.instance.currentUser?.updateDisplayName(nameController.text);
-            storeUserToFirestore();
+            //storeUserToFirestore();
+            storeUserToAPI();
 
             Navigator.popAndPushNamed(context,'home');
           }

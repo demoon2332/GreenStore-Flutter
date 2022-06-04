@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 import '../models/carousel.dart';
 
 class CarouselApi {
-  static const url_link = 'https://cryptic-caverns-40086.herokuapp.com/carousel';
+  static const url_link = 'https://greenstore-api.herokuapp.com/carousel';
 
   static Future<Map<String, dynamic>> getAllCarousel() async{
     var response = await http.get(Uri.parse(url_link));

@@ -277,7 +277,7 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                 children: [
                   FittedBox(
                     child: Image.network(
-                        'https://cryptic-caverns-40086.herokuapp.com/' +
+                        'https://greenstore-api.herokuapp.com/' +
                             product.url!,
                         width: 150,
                         height: 100),

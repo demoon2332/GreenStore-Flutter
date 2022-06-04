@@ -49,6 +49,9 @@ dependencies:
   json_serializable: ^6.2.0
   #package for responsive screen 
   sizer: ^2.0.15
+  #animation
+  syncfusion_flutter_sliders: ^20.1.55
+
 
 dev_dependencies:
   flutter_test:

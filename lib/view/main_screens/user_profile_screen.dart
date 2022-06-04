@@ -1,7 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
 import '../../repository/MemUserInfoRepos.dart';
+import '../../services/user_api.dart';
+
+//model
+import '../../models/DAO/user_dao.dart';
+import '../../models/user.dart' as UserModel;
 
 class UserProfileScreen extends StatefulWidget {
   const UserProfileScreen({Key? key}) : super(key: key);
@@ -11,6 +17,7 @@ class UserProfileScreen extends StatefulWidget {
 }
 
 class _UserProfileScreenState extends State<UserProfileScreen> {
+  String uid = UserDao().auth.currentUser?.uid as String;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
   final _addressController = TextEditingController();
@@ -76,19 +83,56 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 32),
               ),
             ),
-            const SizedBox(height: 32),
-            buildTitle(Icons.person, 'Full name'),
-            const SizedBox(height: 16),
-            nameField(),
-            const SizedBox(height: 24),
-            buildTitle(Icons.phone, 'Phone'),
-            const SizedBox(height: 16),
-            phoneField(),
-            const SizedBox(height: 24),
-            buildTitle(Icons.location_on, 'Address'),
-            const SizedBox(height: 16),
-            addressField(),
-            const SizedBox(height: 16),
+              FutureBuilder(
+                future: UserApi.getUserInformation(uid),
+                builder: (BuildContext context,
+                    AsyncSnapshot<dynamic> snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    if (snapshot.hasData) {
+                      var data = snapshot.data['data'];
+                      UserModel.UserInfo user = UserModel.UserInfo.fromJson(data);
+                      print("user information");
+                      print(user.email);
+                      print(user.phone);
+                      print(user.name);
+                      print(user.address);
+                      return Column(
+                        children: [
+                          avatar(),
+                          contact(user.email!, user.phone!),
+                          nameField(user.name),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          addressField(user.address),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Divider(color: Colors.grey[300], thickness: 6),
+                          const SizedBox(
+                            height: 12,
+                          ),
+                        ],
+                      );
+                    } else {
+                      return Image.asset('assets/not_found.jpg');
+                    }
+                  } else if (snapshot.connectionState ==
+                      ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else {
+                    return Center(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset('assets/not_found.jpg'),
+                              Text('Something went wrong while loading'),
+                            ],
+                          ), //child:
+                    );
+                  }
+                }),
           ])),
     );
   }
@@ -106,12 +150,48 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
     );
   }
 
-  Widget addressField() {
+  Widget avatar() {
+    return Row(
+      children: [
+        SizedBox(
+          width: 10,
+        ),
+        Column(
+          children: [
+            CircleAvatar(
+              radius: 30,
+              backgroundImage: AssetImage('assets/ava.png'),
+            )
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget contact(String email,String phone){
+    return Row(
+      children: [
+        Padding(padding: EdgeInsets.fromLTRB(1, 5, 1, 5),
+          child: Center(
+            child: Text("ductrong1313@gmail.com"+email),
+          ),
+        ),
+        Padding(padding: EdgeInsets.fromLTRB(1, 5, 1, 5),
+          child: Center(
+            child: Text("0909459110"+phone),
+          ),
+        )
+      ],
+    );
+  }
+
+
+  Widget addressField(String? address) {
     return TextFormField(
       validator: (value) => addressValidator(value!),
       controller: _addressController,
       decoration: InputDecoration(
-          hintText: 'Enter your address',
+          hintText: address,
           border: OutlineInputBorder(
               borderSide: const BorderSide(color: Colors.green),
               borderRadius: BorderRadius.circular(16)),
@@ -121,12 +201,12 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
     );
   }
 
-  Widget nameField() {
+  Widget nameField(String? name) {
     return TextFormField(
       validator: (value) => nameValidator(value!),
       controller: _nameController,
       decoration: InputDecoration(
-          hintText: 'Enter your full name',
+          hintText: name,
           border: OutlineInputBorder(
               borderSide: const BorderSide(color: Colors.green),
               borderRadius: BorderRadius.circular(16)),
@@ -136,12 +216,12 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
     );
   }
 
-  Widget phoneField() {
+  Widget phoneField(String? phone) {
     return TextFormField(
       validator: (value) => phoneValidator(value!),
       controller: _phoneController,
       decoration: InputDecoration(
-          hintText: 'Enter your phone number',
+          hintText: phone,
           border: OutlineInputBorder(
               borderSide: const BorderSide(color: Colors.green),
               borderRadius: BorderRadius.circular(16)),
@@ -154,6 +234,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
   void _submitResult(MemUserInfoRepos memUserInfoRepos) {
     if (_formKey.currentState!.validate()) {
       memUserInfoRepos.setAllData(_addressController.text, _nameController.text, _phoneController.text);
+      UserApi.updateUser(uid,_nameController.text, _addressController.text);
       Navigator.pop(context);
     }
   }
