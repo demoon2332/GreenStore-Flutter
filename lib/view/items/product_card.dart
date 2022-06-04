@@ -4,6 +4,9 @@ import '../../models/export_models.dart';
 import '../../convert/price_convert.dart';
 import '../../convert/short_title.dart';
 
+//responsive
+import 'package:sizer/sizer.dart';
+
 class ProductCard{
   static const urlPrimary ='https://greenstore-api.herokuapp.com/';
 
@@ -14,7 +17,7 @@ class ProductCard{
             Navigator.pushNamed(context,'p_details',arguments: product.pid);
           },
           child:SizedBox(
-            width: 150,
+            width: 30.w,
             child: Card(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -23,9 +26,9 @@ class ProductCard{
                   FittedBox(
                     child: Image.network(
                         urlPrimary+product.url!,
-                        width: 150,
-                        height: 150),
-                    fit: BoxFit.fill,
+                        width: 40.w,
+                        height: 35.h),
+                    fit: BoxFit.cover,
                   ),
                   Padding(
                       padding: const EdgeInsets.only(left: 10, right: 10),

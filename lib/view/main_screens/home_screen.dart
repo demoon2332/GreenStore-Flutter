@@ -132,6 +132,7 @@ class _HomeScreenState extends State<HomeScreen> {
           return CarouselSlider.builder(
             itemCount: _data.length,
             options: CarouselOptions(
+
               height: 150,
               autoPlay: true,
             ),
@@ -168,7 +169,7 @@ class _HomeScreenState extends State<HomeScreen> {
           );
         }
         else{
-          return const Text('Đã có lỗi khi tải Carousel');
+          return const Text('Something went wrong while loading Carousel');
         }
       }
     );

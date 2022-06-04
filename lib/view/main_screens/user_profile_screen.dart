@@ -9,6 +9,9 @@ import '../../services/user_api.dart';
 import '../../models/DAO/user_dao.dart';
 import '../../models/user.dart' as UserModel;
 
+//responsive
+import 'package:sizer/sizer.dart';
+
 class UserProfileScreen extends StatefulWidget {
   const UserProfileScreen({Key? key}) : super(key: key);
 
@@ -101,16 +104,16 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                           avatar(),
                           contact(user.email!, user.phone!),
                           nameField(user.name),
-                          const SizedBox(
-                            height: 20,
+                          SizedBox(
+                            height: 8.h,
                           ),
                           addressField(user.address),
-                          const SizedBox(
-                            height: 20,
+                          SizedBox(
+                            height: 8.h,
                           ),
                           Divider(color: Colors.grey[300], thickness: 6),
-                          const SizedBox(
-                            height: 12,
+                          SizedBox(
+                            height: 10.h,
                           ),
                         ],
                       );
@@ -141,7 +144,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
     return Row(
       children: [
         Icon(icon, color: Colors.green),
-        const SizedBox(width: 12),
+        SizedBox(width: 10.w),
         Text(
           title,
           style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
@@ -154,7 +157,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
     return Row(
       children: [
         SizedBox(
-          width: 10,
+          width: 10.w,
         ),
         Column(
           children: [
@@ -173,12 +176,12 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
       children: [
         Padding(padding: EdgeInsets.fromLTRB(1, 5, 1, 5),
           child: Center(
-            child: Text("ductrong1313@gmail.com"+email),
+            child: Text("Email: "+email),
           ),
         ),
         Padding(padding: EdgeInsets.fromLTRB(1, 5, 1, 5),
           child: Center(
-            child: Text("0909459110"+phone),
+            child: Text("Phone: "+phone),
           ),
         )
       ],

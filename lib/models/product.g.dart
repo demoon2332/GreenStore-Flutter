@@ -15,7 +15,7 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
       brand: json['brand'] as String?,
       category_sn: json['category_sn'] as String?,
       details: json['details'] as String?,
-      discount: json['discount'] as double?,
+      discount: json['discount'].toDouble() as double?,
     );
 
 Map<String, dynamic> _$ProductToJson(Product instance) => <String, dynamic>{
