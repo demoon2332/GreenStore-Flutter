@@ -13,6 +13,8 @@ class ProductApi{
   static Future<Map<String, dynamic>> searchProduct(String title) async{
     var response = await http.get(Uri.parse(url_link+'search/'+title));
     var jsonObject = json.decode(response.body);
+    print("fetch search successfully");
+    print(jsonObject);
     return jsonObject;
   }
 

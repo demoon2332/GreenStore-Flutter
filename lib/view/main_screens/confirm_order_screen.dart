@@ -24,8 +24,7 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
 
     return Consumer2<MemCartRepos, MemUserInfoRepos>(
         builder: (context, memCartRepos, memUserInfoRepos, child) {
-      return SafeArea(
-        child: Scaffold(
+      return Scaffold(
             appBar: AppBar(
               title: const Text(
                 'Confirm order',
@@ -35,11 +34,11 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                 color: Colors.green,
               ),
             ),
-            body: Container(
+            body: SafeArea(child: Container(
               padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
               child: initCartScreen(memCartRepos, memUserInfoRepos, _userDAO),
-            )),
-      );
+            ))
+            );      
     });
   }
 
@@ -96,6 +95,8 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
               Text(memUserInfoRepos.getName(), style: TextStyle(fontWeight: FontWeight.bold),),
               const SizedBox(height: 10),
               Text(memUserInfoRepos.getPhone()),
+              const SizedBox(height: 10),
+              Text(memUserInfoRepos.getEmail()),
               const SizedBox(height: 10),
               Text(memUserInfoRepos.getAddress()),
             ],
@@ -235,7 +236,7 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                 height: 35,
                 child: Center(
                     child: Text(
-                  'ORDER',
+                  'CONFIRM',
                   style: const TextStyle(
                       color: Colors.white, fontWeight: FontWeight.bold),
                 )),
@@ -312,8 +313,8 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
   Widget buildItemSearch(
       ProductOrdered product, UserDao _userDAO, MemCartRepos memCartRepos) {
     return SizedBox(
-      //width: 200,
-      height: 125,
+      width: 200,
+      //height: 125,
       child: Card(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,

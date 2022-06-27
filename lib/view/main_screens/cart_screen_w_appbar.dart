@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:greenstore_flutter/view/constant_value.dart';
 import '../../convert/get_total_order.dart';
 import 'package:provider/provider.dart';
 
@@ -8,14 +7,14 @@ import '../../models/export_models.dart';
 import '../../repository/MemCartRepos.dart';
 import '../../models/DAO/user_dao.dart';
 
-class CartScreen extends StatefulWidget {
-  const CartScreen({Key? key}) : super(key: key);
+class CartScreenWithAppBar extends StatefulWidget {
+  const CartScreenWithAppBar({Key? key}) : super(key: key);
 
   @override
-  State<CartScreen> createState() => _CartScreenState();
+  State<CartScreenWithAppBar> createState() => _CartScreenWithAppBarState();
 }
 
-class _CartScreenState extends State<CartScreen> {
+class _CartScreenWithAppBarState extends State<CartScreenWithAppBar> {
   int _code = 0;
   @override
   Widget build(BuildContext context) {
@@ -23,12 +22,21 @@ class _CartScreenState extends State<CartScreen> {
 
     return Consumer<MemCartRepos>(builder: (context, memCartRepos, child) {
       return Scaffold(
-        backgroundColor: successColorLight,
-            body: SafeArea(child: Container(
-          padding: const EdgeInsets.only(top: 36, left: 16, right: 16),
-          child: initCartScreen(memCartRepos, _userDAO),
-        ),)
-      );
+          appBar: AppBar(
+            title: const Text(
+              'Cart',
+              style: TextStyle(color: Colors.black),
+            ),
+            iconTheme: const IconThemeData(
+              color: Colors.green,
+            ),
+          ),
+          body: SafeArea(
+            child: Container(
+              padding: const EdgeInsets.only(top: 36, left: 16, right: 16),
+              child: initCartScreen(memCartRepos, _userDAO),
+            ),
+          ));
     });
   }
 
@@ -41,7 +49,7 @@ class _CartScreenState extends State<CartScreen> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: const [
             Text(
-              "Card",
+              "Cart",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 32),
             ),
             SizedBox(height: 12),
@@ -235,7 +243,8 @@ class _CartScreenState extends State<CartScreen> {
                 children: [
                   InkWell(
                     onTap: () {
-                      Navigator.pushNamed(context, 'p_details', arguments: product.pid);
+                      Navigator.pushNamed(context, 'p_details',
+                          arguments: product.pid);
                     },
                     child: FittedBox(
                       child: Image.network(
@@ -358,3 +367,4 @@ class _CartScreenState extends State<CartScreen> {
     );
   }
 }
+

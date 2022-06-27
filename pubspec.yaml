@@ -51,6 +51,8 @@ dependencies:
   sizer: ^2.0.15
   #animation
   syncfusion_flutter_sliders: ^20.1.55
+  #shadow box loading
+  skeletons: ^0.0.3
 
 
 dev_dependencies:

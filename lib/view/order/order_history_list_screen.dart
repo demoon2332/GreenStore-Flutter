@@ -19,15 +19,14 @@ class OrderHistoryListScreen extends StatefulWidget {
 class _OrderHistoryListScreenState extends State<OrderHistoryListScreen> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
+    return Scaffold(
         appBar: AppBar(
-          title: const Text('Lịch sử đơn hàng',style: TextStyle(color: Colors.black)),
+          title: const Text('Purchase history',style: TextStyle(color: Colors.black)),
           iconTheme: const IconThemeData(
             color: Colors.green
           ),
         ),
-          body: Container(
+          body: SafeArea(child: Container(
             padding:
             const EdgeInsets.only(top: 36, bottom: 16, left: 16, right: 16),
             child: Column(
@@ -38,7 +37,7 @@ class _OrderHistoryListScreenState extends State<OrderHistoryListScreen> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: const [
                     Text(
-                      "Lịch sử đơn hàng",
+                      "Purchase History",
                       style: TextStyle(fontWeight: FontWeight.bold, fontSize: 32),
                     ),
                     SizedBox(height: 22),
@@ -52,6 +51,7 @@ class _OrderHistoryListScreenState extends State<OrderHistoryListScreen> {
             ),
           )),
     );
+    
   }
 
   Widget showData(BuildContext context) {
@@ -79,7 +79,7 @@ class _OrderHistoryListScreenState extends State<OrderHistoryListScreen> {
           return const Center(child: CircularProgressIndicator());
         }
         else{
-          return const Center(child:Text('Lỗi khi tải dữ liệu'));
+          return const Center(child:Text('Something went wrong during loading'));
         }
       },
     );
@@ -108,7 +108,7 @@ class _OrderHistoryListScreenState extends State<OrderHistoryListScreen> {
                         Padding(
                           padding: EdgeInsets.only(left: 10, right: 10, top: 8),
                           child: Text(
-                            'Đơn hàng #'+_order.oid!,
+                            'Order #'+_order.oid!,
                             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                           ),
                         ),

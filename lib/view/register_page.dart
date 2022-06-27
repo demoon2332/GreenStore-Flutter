@@ -28,9 +28,8 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget build(BuildContext context) {
     final _userDao = Provider.of<UserDao>(context, listen: false);
 
-    return SafeArea(
-        child: Scaffold(
-      body: Container(
+    return Scaffold(
+      body: SafeArea(child: Container(
         width: MediaQuery.of(context).size.width,
         //color: Colors.purple,
         decoration: BoxDecoration(
@@ -61,7 +60,8 @@ class _RegisterPageState extends State<RegisterPage> {
           ]),
         ),
       ),
-    ));
+    ),
+    );
   }
 
   Widget buildForm(BuildContext context, UserDao _userDao) {

@@ -8,7 +8,7 @@ class OrderSucessfulScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
           appBar: AppBar(
-            title: const Text('Đặt hàng thành công',
+            title: const Text('Order succeeded',
                 style: const TextStyle(color: Colors.black)),
           ),
           body: Padding(
@@ -23,11 +23,11 @@ class OrderSucessfulScreen extends StatelessWidget {
                     size: 108,
                     color: Colors.green,
                   ),
-                  const Text('Đặt hàng thành công', style: TextStyle(fontWeight: FontWeight.bold),),
+                  const Text('Order successfully', style: TextStyle(fontWeight: FontWeight.bold),),
                   const SizedBox(height: 12),
-                  const Text('Đơn hàng của bạn đang được hệ thống xử lý.'),
+                  const Text('Your order has been sent to store.'),
                   const SizedBox(height: 12),
-                  const Text('Chọn mục Lịch sử đơn hàng để xem chi tiết.'),
+                  const Text('Move ot order History to see detail.'),
                   const SizedBox(height: 12),
                   SizedBox(
                     width: double.infinity,
@@ -38,7 +38,19 @@ class OrderSucessfulScreen extends StatelessWidget {
                       onPressed: (){
                         Navigator.pushReplacementNamed(context, '/');
                       },
-                        child: const Text('Quay về trang chủ')),
+                        child: const Text('Back to home')),
+                  ),
+                  const SizedBox(height: 12),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(Colors.green),
+                        ),
+                        onPressed: (){
+                          Navigator.pushNamed(context, 'his_order');
+                        },
+                        child: const Text('Back to History Screen')),
                   )
                 ],
               ),
@@ -47,3 +59,4 @@ class OrderSucessfulScreen extends StatelessWidget {
     );
   }
 }
+

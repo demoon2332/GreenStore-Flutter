@@ -17,15 +17,14 @@ class _CategoryItemsScreenState extends State<CategoryItemsScreen> {
     //PASS ARGUMENTS
     final cateArgs = ModalRoute.of(context)!.settings.arguments as String;
 
-    return SafeArea(
-      child: Scaffold(
+    return Scaffold(
         appBar: AppBar(
           title: Text(cateArgs, style: TextStyle(color: Colors.black),),
           iconTheme: const IconThemeData(
             color: Colors.green,
           ),
         ),
-          body: Container(
+          body: SafeArea(child: Container(
             padding: const EdgeInsets.all(16),
             child: FutureBuilder(
               future: CategoryItemsApi.getProductsByCategory(cateArgs),
@@ -38,15 +37,16 @@ class _CategoryItemsScreenState extends State<CategoryItemsScreen> {
                       children:[
                         const SizedBox(height: 12),
                         const Text(
-                          "Danh sách tìm kiếm",
+                          "Selected list",
                           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
                         ),
                         const SizedBox(height: 18),
                         Expanded(
                         child: GridView.builder(
                           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,
-                          childAspectRatio: MediaQuery.of(context).size.width /
-                              (MediaQuery.of(context).size.height / 1.6)),
+                          // childAspectRatio: MediaQuery.of(context).size.width /
+                          //     (MediaQuery.of(context).size.height / 1.6)
+                              ),
                           itemCount: data.length,
                           primary: true,
                           scrollDirection: Axis.vertical,
@@ -59,19 +59,19 @@ class _CategoryItemsScreenState extends State<CategoryItemsScreen> {
                     );
                   }
                   else{
-                    return const Center(child: Text('Không có dữ liệu'));
+                    return const Center(child: Text('No data'));
                   }
                 }
                 else if(snapshot.connectionState == ConnectionState.waiting){
                   return const Center(child: CircularProgressIndicator());
                 }
                 else{
-                  return const Center(child: Text('Đã có lỗi khi tải dữ liệu'));
+                  return const Center(child: Text('Something went wrong during loading'));
                 }
 
               }
             ),
-          )),
-    );;
+          ))
+  ,);
   }
 }

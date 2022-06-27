@@ -20,5 +20,8 @@ class Routes{
     'his_order': (context) => const OrderHistoryListScreen(),
     'd_order': (context) => const OrderDetailScreen(),
     'user_profile': (context) => const UserProfileScreen(),
+    'cart_screen_w_appbar': (context) => const CartScreenWithAppBar(),
+    'fav_scr_w_appbar': (context) => const FavoriteScreenWithAppbar(),
+
   };
 }

@@ -16,3 +16,5 @@ export 'order/order_history_list_screen.dart';
 export 'order/order_detail_screen.dart';
 export 'main_screens/user_profile_screen.dart';
 export 'phoneAuthentication/name_screen.dart';
+export 'main_screens/cart_screen_w_appbar.dart';
+export 'main_screens/fav_scr_w_appbar.dart';

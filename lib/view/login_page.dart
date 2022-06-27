@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import '../models/DAO/user_dao.dart';
 import 'phoneAuthentication/edit_phone_number.dart';
 
-
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
@@ -20,14 +19,14 @@ class _LoginPageState extends State<LoginPage> {
   String _errorAfterSubmit = "";
 
   @override
-  void initState(){
+  void initState() {
     checkLogin();
     super.initState();
   }
 
-   checkLogin() async {
+  checkLogin() async {
     var a = await auth.currentUser;
-    if(a != null){
+    if (a != null) {
       Navigator.pushReplacementNamed(context, '/');
     }
   }
@@ -42,80 +41,78 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    final _userDao = Provider.of<UserDao>(context, listen: false);
-
-    return SafeArea(
-        child: Scaffold(
-      body: Container(
-        width: MediaQuery.of(context).size.width,
-        //color: Colors.purple,
-        decoration: const BoxDecoration(
-            gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment(1.1, 0.0),
-          colors: <Color>[Color(0xb434eb00), const Color(0xffffffff)],
-          tileMode: TileMode.repeated,
-        )),
-        padding: const EdgeInsets.all(32),
-        child: Center(
-          child: ListView(shrinkWrap: true, children: [
-            Card(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20)),
-              elevation: 24,
-              shadowColor: Colors.green,
-              child: Column(children: [
-                const SizedBox(height: 16),
-                const Text(
-                  'Đăng nhập',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28),
-                  textAlign: TextAlign.center,
-                ),
-                buildForm(context, _userDao),
-              ]),
-            ),
-          ]),
+    Size size = MediaQuery.of(context).size;
+    ScrollController _scrollController = new ScrollController(
+      initialScrollOffset: 0.0,
+      keepScrollOffset: true,
+    );
+    return Scaffold(
+        body: SafeArea(
+          child: Stack(
+          children: [
+            Align(
+                alignment: Alignment.center,
+                child: SingleChildScrollView(
+                  reverse: true,
+                  controller: _scrollController,
+                  child: Container(
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            'assets/login.png',
+                            fit: BoxFit.fill,
+                          ),
+                          Container(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 5),
+                              width: size.width * 0.9,
+                              decoration: BoxDecoration(),
+                              child: Column(
+                                children: [FormLogin()],
+                              )),
+                        ]),
+                  ),
+                ))
+          ],
         ),
-      ),
-    ));
+      
+        )
+      );
+  }
+
+  Widget FormLogin() {
+    final _userDao = Provider.of<UserDao>(context, listen: false);
+    return Column(
+      children: [
+        Column(
+          children: [
+            buildForm(context, _userDao),
+            btnSubmit(context, _userDao),
+            SizedBox(height: 8),
+            btnPhoneLogin(),
+            SizedBox(height: 8),
+            btnRegister(),
+            SizedBox(height: 8),
+          ],
+        )
+      ],
+    );
   }
 
   Widget buildForm(BuildContext context, UserDao userDao) {
     return Container(
-      padding: const EdgeInsets.all(16),
-      width: MediaQuery.of(context).size.width,
       child: Form(
           key: _formKey,
           child: Column(children: [
             emailField(),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             passwordField(),
-            const SizedBox(height: 12),
             Text(
               _errorAfterSubmit,
-              style: const TextStyle(color: Colors.red),
+              style: TextStyle(color: Colors.red),
             ),
-            const SizedBox(height: 8),
-            btnSubmit(context, userDao),
-            const SizedBox(height: 12),
-            const Text(
-              "Hoặc",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 8),
-            btnPhoneLogin(),
-            const SizedBox(height: 12),
-            const Text(
-              "Chưa có tài khoản? ",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 8),
-            btnRegister(),
-            const SizedBox(height: 8),
           ])),
     );
   }
@@ -125,16 +122,16 @@ class _LoginPageState extends State<LoginPage> {
       validator: (value) => emailValidator(value!),
       controller: _emailController,
       decoration: InputDecoration(
-          hintText: 'Vui lòng nhập email của bạn',
-          label: const Text(
+          hintText: 'Enter your email',
+          label: Text(
             'Email',
-            style: TextStyle(color: Colors.green),
+            style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold),
           ),
           border: OutlineInputBorder(
-              borderSide: const BorderSide(color: Colors.green),
+              borderSide: BorderSide(color: Colors.green),
               borderRadius: BorderRadius.circular(16)),
           focusedBorder: OutlineInputBorder(
-              borderSide: const BorderSide(color: Colors.green),
+              borderSide: BorderSide(color: Colors.green),
               borderRadius: BorderRadius.circular(16))),
     );
   }
@@ -145,16 +142,16 @@ class _LoginPageState extends State<LoginPage> {
       validator: (value) => passwordValidator(value!),
       controller: _passwordController,
       decoration: InputDecoration(
-          hintText: 'Vui lòng nhập mật khẩu của bạn',
-          label: const Text(
-            'Mật khẩu',
-            style: const TextStyle(color: Colors.green),
+          hintText: 'Enter your password',
+          label: Text(
+            'Password',
+            style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold),
           ),
           border: OutlineInputBorder(
-              borderSide: const BorderSide(color: Colors.green),
+              borderSide: BorderSide(color: Colors.green),
               borderRadius: BorderRadius.circular(16)),
           focusedBorder: OutlineInputBorder(
-              borderSide: const BorderSide(color: Colors.green),
+              borderSide: BorderSide(color: Colors.green),
               borderRadius: BorderRadius.circular(16))),
     );
   }
@@ -164,8 +161,8 @@ class _LoginPageState extends State<LoginPage> {
         width: double.infinity,
         height: 45,
         child: ElevatedButton(
-          child: const Text(
-            "ĐĂNG NHẬP",
+          child: Text(
+            "LOGIN",
             style: TextStyle(fontSize: 14),
           ),
           style: ButtonStyle(
@@ -173,7 +170,7 @@ class _LoginPageState extends State<LoginPage> {
               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16),
-                side: const BorderSide(color: Colors.green),
+                side: BorderSide(color: Colors.green),
               ))),
           onPressed: () async {
             if (_formKey.currentState!.validate()) {
@@ -197,16 +194,16 @@ class _LoginPageState extends State<LoginPage> {
         width: double.infinity,
         height: 45,
         child: ElevatedButton(
-          child: const Text(
-            "ĐĂNG KÝ NGAY",
-            style: const TextStyle(fontSize: 14, color: Colors.black),
+          child: Text(
+            "REGISTER",
+            style: TextStyle(fontSize: 14, color: Colors.black),
           ),
           style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all<Color>(Colors.yellow),
               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16),
-                side: const BorderSide(color: Colors.yellow),
+                side: BorderSide(color: Colors.yellow),
               ))),
           onPressed: () {
             Navigator.pushNamed(context, 'register');
@@ -220,7 +217,7 @@ class _LoginPageState extends State<LoginPage> {
         width: double.infinity,
         child: ElevatedButton(
           child: Padding(
-            padding: const EdgeInsets.all(8),
+            padding: EdgeInsets.all(8),
             child: FittedBox(
                 fit: BoxFit.fill,
                 alignment: Alignment.center,
@@ -232,57 +229,51 @@ class _LoginPageState extends State<LoginPage> {
               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16),
-                side: const BorderSide(color: Colors.green),
+                side: BorderSide(color: Colors.green),
               ))),
           onPressed: () {},
         ));
   }
 
-  Widget btnPhoneLogin(){
+  Widget btnPhoneLogin() {
     return SizedBox(
         height: 40,
         width: double.infinity,
         child: ElevatedButton(
-          child: Padding(
-            padding: const EdgeInsets.all(8),
-            child: FittedBox(
-                fit: BoxFit.fill,
-                alignment: Alignment.center,
-                child:
-                    Image.asset('assets/gg_icon.png', height: 40, width: 60)),
+          child: Text(
+            "LOGIN WITH PHONE NUMBER",
+            style: TextStyle(fontSize: 14, color: Colors.black),
           ),
           style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16),
-                side: const BorderSide(color: Colors.green),
+                side: BorderSide(color: Colors.green),
               ))),
           onPressed: () {
-            Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => EditPhoneScreen())
-                    );
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => EditPhoneScreen()));
           },
         ));
   }
 
   String? emailValidator(String value) {
     if (value == null || value.isEmpty) {
-      return "Vui lòng điền email";
+      return "Enter your email";
     } else if (!RegExp(
             r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
         .hasMatch(value)) {
-      return "Sai định dạng email";
+      return "Invalid email";
     }
     return null;
   }
 
-    String? passwordValidator(String? pass){
-    String  pattern = r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
+  String? passwordValidator(String? pass) {
+    String pattern =
+        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
     RegExp regExp = new RegExp(pattern);
-    if(regExp.hasMatch(pass!))
+    if (regExp.hasMatch(pass!))
       return "At least 1 uppercase, lowercase and a special character.";
     else
       return null;
@@ -291,6 +282,4 @@ class _LoginPageState extends State<LoginPage> {
     // +"\n At least 1 lowercase character"
     // +"\n At least 1 special character.";
   }
-
-
 }

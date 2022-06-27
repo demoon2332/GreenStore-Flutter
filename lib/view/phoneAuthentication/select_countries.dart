@@ -40,7 +40,7 @@ var searchValue = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CustomScrollView(
+      body:SafeArea(child:  CustomScrollView(
         slivers: [
           SliverAppBar(
             title: Text("Select Country"),
@@ -93,6 +93,7 @@ var searchValue = "";
           ),
         ],
       ),
+    )
     );
   }
 }

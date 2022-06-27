@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../convert/price_convert.dart';
 import 'package:provider/provider.dart';
+import 'package:badges/badges.dart';
 
 // MODELS
 import '../../models/DAO/user_dao.dart';
@@ -32,9 +33,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   @override
   Widget build(BuildContext context) {
     final pid = ModalRoute.of(context)!.settings.arguments as String;
+    var _prod = Provider.of<MemCartRepos>(context, listen: true);
+    var _fav = Provider.of<MemFavRepos>(context, listen: true);
 
-    return SafeArea(
-      child: Scaffold(
+    return  Scaffold(
           appBar: AppBar(
             title: const Text(
               'Product detail',
@@ -43,8 +45,37 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             iconTheme: const IconThemeData(
               color: Colors.green,
             ),
+            actions: [
+              IconButton(
+                  icon: Badge(
+                    badgeColor: Colors.red,
+                    badgeContent: Text(
+                      _fav.getLength().toString(),
+                      style: const TextStyle(color: Colors.white),
+                    ),
+                    showBadge: (_fav.getLength() > 0),
+                    child: const Icon(Icons.favorite),
+                  ),
+                  onPressed: () {
+                    Navigator.pushNamed(context, 'fav_scr_w_appbar');
+                  }),
+              IconButton(
+                icon: Badge(
+                  child: const Icon(Icons.shopping_cart),
+                  badgeColor: Colors.red,
+                  badgeContent: Text(
+                    _prod.getLength().toString(),
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                  showBadge: (_prod.getLength() > 0),
+                ),
+                onPressed: () {
+                  Navigator.pushNamed(context, 'cart_screen_w_appbar');
+                },
+              )
+            ],
           ),
-          body: Container(
+          body: SafeArea(child: Container(
             padding: const EdgeInsets.all(16),
             child: Column(children: [
               Expanded(
@@ -110,8 +141,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               const SizedBox(height: 8),
               buildAddToCartButton(pid),
             ]),
-          )),
-    );
+          ))
+  );
   }
 
   Widget buildRatingButton(BuildContext context, String pid) {
@@ -332,11 +363,27 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           urlPrimary + product.url!,
         ),
         const SizedBox(height: 16,),
-        Text(
-          PriceConvert.convertToVnd(product.price!),
+        if(product.discount! > 0)...[
+           Text(
+          PriceConvert.convertToVnd(product.price!)+" (${(product.discount! * 100).round()}%)",
+          style: const TextStyle(
+              fontWeight: FontWeight.bold, color: Colors.red, fontSize: 21,
+              decoration: TextDecoration.lineThrough),
+          ),
+           Text(
+          PriceConvert.convertToVnd((product.price! - product.price! * product.discount!).round()),
           style: const TextStyle(
               fontWeight: FontWeight.bold, color: Colors.green, fontSize: 24),
         ),
+        ]
+        else...[
+           Text(
+          PriceConvert.convertToVnd(product.price!),
+          style: const TextStyle(
+              fontWeight: FontWeight.bold, color: Colors.green, fontSize: 24,
+              ),
+          ),
+        ],
         const SizedBox(
           height: 10,
         ),
@@ -376,3 +423,4 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     );
   }
 }
+

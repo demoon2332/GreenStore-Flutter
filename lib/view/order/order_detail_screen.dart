@@ -23,22 +23,21 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
     final oid = ModalRoute.of(context)!.settings.arguments as String;
     var _userDAO = Provider.of<UserDao>(context, listen: false);
 
-    return SafeArea(
-      child: Scaffold(
+    return Scaffold(
           appBar: AppBar(
             title: Text(
-              'Đơn hàng #'+oid,
+              'Order #'+oid,
               style: const TextStyle(color: Colors.black),
             ),
             iconTheme: const IconThemeData(
               color: Colors.green,
             ),
           ),
-          body: Container(
+          body: SafeArea(child: Container(
             padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
             child: initCartScreen(oid, _userDAO),
-          )),
-    );
+          ))
+          );
   }
 
   Widget cartBody(Order order, UserDao _userDAO) {
@@ -54,19 +53,19 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  _headerTitleUser(Icons.person, "Thông tin khách hàng"),
+                  _headerTitleUser(Icons.person, "Customer's information"),
                   const SizedBox(height: 12),
                   _cardUserInfo(memUserInfoRepos),
                   const SizedBox(height: 28),
-                  _headerTitle(Icons.credit_card, "Hình thức thanh toán"),
+                  _headerTitle(Icons.credit_card, "Payment Method"),
                   const SizedBox(height: 12),
                   _cardPaymentMethod(),
                   const SizedBox(height: 28),
-                  _headerTitle(Icons.local_shipping, "Hình thức vận chuyển"),
+                  _headerTitle(Icons.local_shipping, "Delivery method"),
                   const SizedBox(height: 12),
                   _cardShipping(),
                   const SizedBox(height: 28),
-                  _headerTitle(Icons.shopping_cart, "Giỏ hàng"),
+                  _headerTitle(Icons.shopping_cart, "Cart"),
                   const SizedBox(height: 12),
                   SizedBox(
                     child: showData(order, _userDAO),
@@ -118,7 +117,7 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
-                "Thanh toán khi nhận hàng",
+                "Paid at delivery",
                 style: const TextStyle(fontSize: 16),
               ),
             ],
@@ -139,7 +138,7 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
-                "Giao hàng tiêu chuẩn (sau 1 ngày làm việc)",
+                "Standard Delivery",
                 style: TextStyle(fontSize: 14),
               ),
             ],
@@ -185,7 +184,7 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
               return cartBody(order, _userDAO);
             } else {
               return const Center(
-                child: Text('Không có dữ liệu tìm thấy'),
+                child: Text('Data not found'),
               );
             }
           } else if (snapshot.connectionState == ConnectionState.waiting) {
@@ -194,7 +193,7 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
             );
           } else {
             return const Center(
-              child: Text('Có lỗi khi tải dữ liệu.'),
+              child: Text('Something went wrong during loading.'),
             );
           }
         });
@@ -215,7 +214,7 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
             height: 35,
             child: const Center(
                 child: Text(
-              'TỔNG ĐƠN HÀNG',
+              'TOTAL ORDER',
               style: TextStyle(
                   color: Colors.white, fontWeight: FontWeight.bold),
             )),
@@ -261,8 +260,8 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
   Widget buildItemSearch(
       ProductOrdered product, UserDao _userDAO) {
     return SizedBox(
-      //width: 200,
-      height: 125,
+      width: 200,
+      //height: 125,
       child: InkWell(
         onTap: (){
           Navigator.pushNamed(context, 'p_details',arguments:  product.pid);
@@ -309,7 +308,7 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                           padding: const EdgeInsets.only(left: 10),
                           child: Chip(
                               label: Text(
-                                  'Số lượng: ' + product.quantity!.toString())),
+                                  'Quantity: ' + product.quantity!.toString())),
                         ),
                       ],
                     ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenstore_flutter/view/constant_value.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -29,10 +30,9 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Container(
-          color: Colors.green,
+    return Scaffold(
+        body: SafeArea(child: Container(
+          color: successColorLight,
           padding: const EdgeInsets.all(16),
           child: Center(
             child: Column(
@@ -43,12 +43,12 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                   child:  Image.asset('assets/splash_cart.jpg', width: 300, height: 300),
                 ),
                 const SizedBox(height:24),
-                const Text("Loading...", style: TextStyle(color: Colors.white),),
+                const Text("Welcome to GreenStore", style: TextStyle(color: contentColorLightTheme,fontSize: 24)),
               ],
             )
           ),
         ),
-      ),
-    );
+      )
+      );    
   }
 }

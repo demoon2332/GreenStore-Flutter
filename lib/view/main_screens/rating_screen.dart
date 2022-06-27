@@ -18,8 +18,7 @@ class _RatingScreenState extends State<RatingScreen> {
   Widget build(BuildContext context) {
     final pid = ModalRoute.of(context)!.settings.arguments as String;
 
-    return SafeArea(
-      child: Scaffold(
+    return Scaffold(
           appBar: AppBar(
             title: const Text(
               'Rating detail',
@@ -29,7 +28,7 @@ class _RatingScreenState extends State<RatingScreen> {
               color: Colors.green,
             ),
           ),
-          body: Container(
+          body: SafeArea(child: Container(
             padding:
                 const EdgeInsets.only(top: 36, bottom: 16, left: 16, right: 16),
             child: FutureBuilder(
@@ -66,7 +65,7 @@ class _RatingScreenState extends State<RatingScreen> {
                     return const Center(child: Text('Something went wrong during loading'));
                   }
                 }),
-          )),
+          ))
     );
   }
 

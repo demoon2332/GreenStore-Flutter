@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:greenstore_flutter/view/constant_value.dart';
 
 import '../../convert/price_convert.dart';
 
@@ -9,50 +8,57 @@ import 'package:provider/provider.dart';
 
 import '../items/no_items_page.dart';
 
-class FavoriteScreen extends StatefulWidget {
-  const FavoriteScreen({Key? key}) : super(key: key);
+class FavoriteScreenWithAppbar extends StatefulWidget {
+  const FavoriteScreenWithAppbar({Key? key}) : super(key: key);
 
   @override
-  State<FavoriteScreen> createState() => _FavoriteScreenState();
+  State<FavoriteScreenWithAppbar> createState() => _FavoriteScreenWithAppbarState();
 }
 
-class _FavoriteScreenState extends State<FavoriteScreen> {
+class _FavoriteScreenWithAppbarState extends State<FavoriteScreenWithAppbar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: successColorLight,
-          body: SafeArea(child: Container(
-        padding:
+        appBar: AppBar(
+          title: const Text(
+            'Favorite Screen',
+            style: TextStyle(color: Colors.black),
+          ),
+          iconTheme: const IconThemeData(
+            color: Colors.green,
+          ),
+        ),
+        body: SafeArea(
+          child: Container(
+            padding:
             const EdgeInsets.only(top: 36, bottom: 16, left: 16, right: 16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Column(
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: const [
-                Text(
-                  "Favorite",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 32),
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: const [
+                    Text(
+                      "Favorite",
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 32),
+                    ),
+                    SizedBox(height: 12),
+                    Text(
+                      "Slide to remove product.",
+                      style: TextStyle(color: Colors.grey, fontSize: 14),
+                    ),
+                    SizedBox(height: 22),
+                  ],
                 ),
-                SizedBox(height: 12),
-                Text(
-                  "Slide to remove product.",
-                  style: TextStyle(color: Colors.grey, fontSize: 14),
+                Expanded(
+                  child: showData(context),
+                  flex: 4,
                 ),
-                SizedBox(height: 22),
               ],
             ),
-            Expanded(
-              child: showData(context),
-              flex: 4,
-            ),
-          ],
-        ),
-      )
-      ,)
-      );
-  
+          ),
+        ));
   }
 
   //TODO: Add Dismissible to delete items
@@ -147,3 +153,4 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
     );
   }
 }
+

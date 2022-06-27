@@ -6,6 +6,11 @@ class UserDao extends ChangeNotifier{
   final auth = FirebaseAuth.instance;
   var _verificationId;
   late int resendingToken;
+  String _name = "";
+  String _address ="";
+  String _phone = "";
+  String _email = "";
+
   
 
 
@@ -18,8 +23,49 @@ class UserDao extends ChangeNotifier{
   }
 
   String? email(){
-    return auth.currentUser?.email;
+    if(auth.currentUser?.email != "")
+      return auth.currentUser?.email;
+    else
+      return _email;
   }
+
+  String? name(){
+      return _name;
+  }
+
+  String? address(){
+    return _address;
+  }
+
+  String? phone(){
+    if(auth.currentUser?.phoneNumber != "")
+      return auth.currentUser?.phoneNumber;
+    else
+      return _phone;
+  }
+
+  void setEmail(String email){
+    _email = email;
+    notifyListeners();
+  }
+
+  void setName(String name){
+    _name = name;
+    print("set name in user dao");
+    print(_name);
+    notifyListeners();
+  }
+
+  void setAddress(String address){
+    _address = address;
+    notifyListeners();
+  }
+
+  void setPhone(String phone){
+    _phone = phone;
+    notifyListeners();
+  }
+
 
 
 
@@ -56,6 +102,8 @@ class UserDao extends ChangeNotifier{
       return "";
     }
     on FirebaseAuthException catch (e){
+      print(e.code);
+      print("E code of firebaseAuthException");
       if(e.code == 'weak-password'){
         return "Weak password";
       }

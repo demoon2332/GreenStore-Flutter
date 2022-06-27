@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenstore_flutter/view/constant_value.dart';
 
 import '../../services/product_api.dart';
 import '../../models/export_models.dart';
@@ -32,9 +33,10 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-          body: GestureDetector(
+    return Scaffold(
+        backgroundColor: successColorLight,
+          body: SafeArea(child: 
+          GestureDetector(
             onTap: (){
               _searchFocusNode.unfocus();
             },
@@ -62,8 +64,8 @@ class _SearchScreenState extends State<SearchScreen> {
             ],
         ),
       ),
-          )),
-    );
+          ))  
+ );
   }
 
   Widget buildSearchField() {
@@ -74,8 +76,8 @@ class _SearchScreenState extends State<SearchScreen> {
       },
       focusNode: _searchFocusNode,
       decoration: InputDecoration(
-          prefixIcon: Icon(Icons.search, color: Colors.green),
-          hintText: 'Search...',
+          suffixIcon: Icon(Icons.search, color: Colors.green),
+          hintText: 'Search something...',
           border: OutlineInputBorder(
               borderSide: const BorderSide(color: Colors.transparent),
               borderRadius: BorderRadius.circular(16)),
@@ -88,7 +90,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
   //TODO: ADD Future Builder and ListView.builder when user start texting. (Check if text is null, clear the showData)
   Widget showData() {
-    if (_searchText.length < 3) {
+    if (_searchText.length < 1) {
       return notFoundScreen();
     } else {
       return FutureBuilder(
